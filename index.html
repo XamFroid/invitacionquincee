@@ -288,22 +288,8 @@
                         0 0 0 1px rgba(93, 173, 226, 0.1),
                         0 0 60px rgba(93, 173, 226, 0.15);
             overflow: hidden;
-            animation: containerEntry 1.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             z-index: 1;
-        }
-
-        @keyframes containerEntry {
-            from { 
-                opacity: 0; 
-                transform: translateY(60px) scale(0.9);
-                filter: blur(10px);
-            }
-            to { 
-                opacity: 1; 
-                transform: translateY(0) scale(1);
-                filter: blur(0);
-            }
         }
 
         .float-decoration {
@@ -541,32 +527,32 @@
         /* Reproductor de música */
         .music-player {
             margin: 50px auto 40px;
-            max-width: 350px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 20px 60px rgba(77, 208, 225, 0.25),
-                        0 0 0 1px rgba(77, 208, 225, 0.1);
+            max-width: 360px;
+            background: linear-gradient(135deg, #f0fdff 0%, #e0f7fa 100%);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: 0 15px 45px rgba(77, 208, 225, 0.2),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(77, 208, 225, 0.2);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
         }
 
         .music-player::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #4DD0E1, #26C6DA, #80DEEA, #4DD0E1);
-            background-size: 200% 100%;
-            animation: gradientShift 3s ease infinite;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(77, 208, 225, 0.08) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 0%; }
-            50% { background-position: 100% 0%; }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .player-controls-container {
@@ -574,130 +560,133 @@
             align-items: center;
             justify-content: center;
             gap: 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .player-btn-circle {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(135deg, #4DD0E1 0%, #26C6DA 100%);
-            border: none;
+            width: 52px;
+            height: 52px;
+            background: white;
+            border: 2px solid rgba(77, 208, 225, 0.3);
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
+            font-size: 20px;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            box-shadow: 0 8px 20px rgba(77, 208, 225, 0.35);
+            box-shadow: 0 5px 15px rgba(77, 208, 225, 0.15);
             position: relative;
             flex-shrink: 0;
+            color: #26C6DA;
         }
 
         .player-btn-circle:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 12px 28px rgba(77, 208, 225, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(77, 208, 225, 0.3);
+            border-color: rgba(77, 208, 225, 0.5);
         }
 
         .player-btn-circle:active {
-            transform: translateY(-1px) scale(0.98);
+            transform: translateY(-1px) scale(0.95);
         }
 
         .player-btn-circle.play-btn {
-            width: 65px;
-            height: 65px;
-            font-size: 26px;
-            box-shadow: 0 10px 30px rgba(77, 208, 225, 0.4);
+            width: 70px;
+            height: 70px;
+            font-size: 28px;
+            background: linear-gradient(135deg, #4DD0E1 0%, #26C6DA 100%);
+            border: none;
+            box-shadow: 0 10px 30px rgba(77, 208, 225, 0.35);
+            color: white;
         }
 
-        .player-btn-circle.secondary {
-            width: 48px;
-            height: 48px;
-            font-size: 20px;
-            background: linear-gradient(135deg, rgba(77, 208, 225, 0.15) 0%, rgba(38, 198, 218, 0.15) 100%);
-            border: 2px solid rgba(77, 208, 225, 0.3);
-            box-shadow: 0 4px 12px rgba(77, 208, 225, 0.15);
-        }
-
-        .player-btn-circle.secondary:hover {
-            background: linear-gradient(135deg, rgba(77, 208, 225, 0.25) 0%, rgba(38, 198, 218, 0.25) 100%);
-            border-color: rgba(77, 208, 225, 0.5);
+        .player-btn-circle.play-btn:hover {
+            background: linear-gradient(135deg, #26C6DA 0%, #00ACC1 100%);
+            box-shadow: 0 12px 35px rgba(77, 208, 225, 0.5);
         }
 
         .player-progress-bar {
             width: 100%;
-            height: 5px;
+            height: 6px;
             background: rgba(77, 208, 225, 0.15);
             border-radius: 10px;
-            overflow: hidden;
+            overflow: visible;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 25px;
             position: relative;
+            z-index: 2;
         }
 
         .player-progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #4DD0E1, #26C6DA);
+            background: linear-gradient(90deg, #4DD0E1, #26C6DA, #80DEEA);
+            background-size: 200% 100%;
             border-radius: 10px;
             width: 0%;
             transition: width 0.1s linear;
             position: relative;
+            animation: shimmerProgress 2s ease infinite;
+        }
+
+        @keyframes shimmerProgress {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .player-progress-fill::after {
             content: '';
             position: absolute;
-            right: 0;
+            right: -6px;
             top: 50%;
             transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             background: white;
+            border: 3px solid #26C6DA;
             border-radius: 50%;
-            box-shadow: 0 2px 8px rgba(77, 208, 225, 0.5);
+            box-shadow: 0 2px 10px rgba(77, 208, 225, 0.4);
         }
 
         .player-time {
             display: flex;
             justify-content: space-between;
-            margin-top: 8px;
-            font-size: 11px;
-            color: #1E5A6E;
+            margin-top: 10px;
+            font-size: 12px;
+            color: #26697D;
             font-family: 'Montserrat', sans-serif;
-            font-weight: 500;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
         }
 
         @media (max-width: 768px) {
             .music-player {
                 margin: 40px 20px;
-                padding: 20px;
-                max-width: 320px;
+                padding: 25px;
+                max-width: 340px;
             }
             
             .player-btn-circle.play-btn {
-                width: 60px;
-                height: 60px;
-                font-size: 24px;
+                width: 65px;
+                height: 65px;
+                font-size: 26px;
             }
             
             .player-btn-circle {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-            
-            .player-btn-circle.secondary {
-                width: 45px;
-                height: 45px;
+                width: 48px;
+                height: 48px;
                 font-size: 18px;
             }
         }
 
         @media (max-width: 480px) {
             .music-player {
-                padding: 18px;
-                max-width: 300px;
+                padding: 20px;
+                max-width: 310px;
             }
-            
+
             .player-controls-container {
                 gap: 15px;
             }
@@ -1598,9 +1587,9 @@
                 <!-- Reproductor de música -->
                 <div class="music-player" id="musicPlayer">
                     <div class="player-controls-container">
-                        <button class="player-btn-circle secondary" id="prevBtn">⏮️</button>
+                        <button class="player-btn-circle" id="prevBtn">⏮️</button>
                         <button class="player-btn-circle play-btn" id="playBtn">▶️</button>
-                        <button class="player-btn-circle secondary" id="volumeBtn">🔊</button>
+                        <button class="player-btn-circle" id="volumeBtn">🔊</button>
                     </div>
                     
                     <div class="player-progress-bar" id="progressBar">
